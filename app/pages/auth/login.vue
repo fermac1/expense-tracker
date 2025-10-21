@@ -30,21 +30,21 @@
         <!-- Input Field -->
         <input
           type="email"
-          v-model="email"
+          v-model="form.email"
           @focus="isEmailFocused = true"
           @blur="isEmailFocused = false"
           :class="[
-              isEmailFocused || email ? 'pt-6 pb-2 placeholder-transparent' : 'py-2 placeholder:text-[#11182740]',
-              emailError.length ? 'border-[#D60000]' : 'border-[#EDEFF3]',
+              isEmailFocused || form.email ? 'pt-6 pb-2 placeholder-transparent' : 'py-2 placeholder:text-[#11182740]',
+              hasSubmitted && emailError ? 'border-[#D60000]' : 'border-[#EDEFF3]',
           ]"
           class="w-full border border-[#EDEFF3] text-[#262C36] text-[12px] font-normal rounded-[8px] px-4 focus:outline-none focus:ring-1 focus:ring-[#00065C]"
           placeholder="Enter Email Address"
         />
 
           <!-- Error message -->
-        <p v-if="email === ''" class="text-[#D60000] text-[8px] font-[400]">
-          <span></span>
-          <span>{{ emailError }}</span>
+        <p v-if="hasSubmitted && emailError" class="flex py-2 text-[#D60000] font-[400]">
+          <img src="/icons/caution.png">
+          <span class="text-[10px] ml-2">{{ emailError }}</span>
         </p>
       </div>
 
@@ -53,7 +53,7 @@
         <label
           :class="[
             'absolute left-4 text-xs transition-all duration-200',
-            isPasswordFocused || password ? 'top-1 text-[#667D99] text-[8px] font-[400]' : 'top-2.5 text-[#11182740] text-[12px] text-transparent'
+            isPasswordFocused || form.password ? 'top-1 text-[#667D99] text-[8px] font-[400]' : 'top-2.5 text-[#11182740] text-[12px] text-transparent'
           ]"
         >
           Password
@@ -65,33 +65,35 @@
           @focus="isPasswordFocused = true"
           @blur="isPasswordFocused = false"
           :class="[
-            isPasswordFocused || password ? 'pt-6 pb-2 placeholder-transparent' : 'py-2 placeholder:text-[#11182740]',
-             passwordError.length ? 'border-[#D60000]' : 'border-[#EDEFF3]',
+            isPasswordFocused || form.password ? 'pt-6 pb-2 placeholder-transparent' : 'py-2 placeholder:text-[#11182740]',
+             hasSubmitted && passwordError ? 'border-[#F56565]' : 'border-[#EDEFF3] focus:outline-none focus:ring-1 focus:ring-[#00065C]',
           ]"
           
-          class="w-full pr-10 pl-4 py-2 border border-[#EDEFF3] font-normal text-[#262C36] text-[12px] rounded-[8px] focus:outline-none focus:ring-1 focus:ring-[#00065C]"
-          v-model="password"
+          class="w-full pr-10 pl-4 py-2 border font-normal text-[#262C36] text-[12px] rounded-[8px]"
+          v-model="form.password"
         />
 
         <!-- Lock Icon on Right Side -->
         <img
           src="/images/lock.png"
           alt="lock icon"
-          class="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 pointer-events-none"
+          class="absolute right-3 transform -translate-y-1/2 w-4 h-4 pointer-events-none"
+          :class="[hasSubmitted && passwordError ? 'mb-4 top-4' : 'mb-0 top-1/2']"
         />
 
         <!-- Error message -->
-        <p v-if="password === ''" class="text-[#D60000] text-[8px] font-[400]">
-          <span></span>
-          <span>{{ passwordError }}</span>
+        <p v-if="hasSubmitted && passwordError" class="flex py-2 text-[#D60000] font-[400]">
+          <img src="/icons/caution.png">
+          <span class="text-[10px] ml-2">{{ passwordError }}</span>
         </p>
       </div>
 
 
-       
-
+      <!-- :disabled="!isFormValid" -->
       <button type="submit"
-              class="w-full text-[12px] font-normal bg-[#EDEFF3] text-[#92A0BE] py-3 rounded-[48px]">
+              class="w-full text-[12px] font-normal py-3 rounded-[48px]"
+              :class="[isFormValid  ? 'bg-[#13003D] text-[#FAFAFA]' : 'bg-[#EDEFF3] text-[#92A0BE]']"
+              >
         Sign In
       </button>
     </form>
@@ -102,47 +104,52 @@
 
 <script setup lang="ts">
 definePageMeta({
-  layout: 'auth-layout'
+  layout: 'login-layout'
 })
 
-import { ref } from 'vue'
+import { ref, reactive, computed } from 'vue'
 import { useRouter } from 'vue-router'
-// import { useUserStore } from '@/stores/user'
+
+const router = useRouter()
 
 const isEmailFocused = ref(false)
 const isPasswordFocused = ref(false)
-const router = useRouter()
-// const userStore = useUserStore()
 
-const email = ref('')
-const password = ref('')
-const emailError = ref('') 
-const passwordError = ref('') 
+const emailError = ref('')
+const passwordError = ref('')
+
+const form = reactive({
+  email: '',
+  password: '',
+})
+
+const hasSubmitted = ref(false)
+
+const isFormValid = computed(() => {
+  return form.email.trim() !== '' && form.password.trim() !== ''
+})
 
 const handleLogin = () => {
-let hasError = false
-
-  // Clear previous errors
+  hasSubmitted.value = true
   emailError.value = ''
   passwordError.value = ''
 
-  if (!email.value) {
+  let errorFound = false
+
+  if (!form.email.trim()) {
     emailError.value = 'Email is required.'
-    hasError = true
+    errorFound = true
   }
 
-  if (!password.value) {
-    passwordError.value = 'Invalid password.'
-    hasError = true
+  if (!form.password.trim()) {
+    passwordError.value = 'Password is required.'
+    errorFound = true
   }
 
-  // Stop if any error was found
-  if (hasError) return
+  if (errorFound) return
 
-  // Save credentials to store (or just email, for practical reasons)
-//   userStore.setCredentials(email.value, password.value)
-
-  // Redirect
-//   router.push('/dashboard')
+  // ✅ Redirect or submit logic
+  // router.push('/dashboard')
 }
 </script>
+
