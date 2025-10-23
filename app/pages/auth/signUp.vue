@@ -275,6 +275,6 @@ const handleSignup = () => {
 
   // ✅ Proceed to next step (e.g., API or redirect)
   // await someApiCall(form)
-  router.push('/dashboard') // or wherever
+  router.push('/auth/login') // or wherever
 }
 </script>

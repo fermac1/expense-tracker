@@ -149,7 +149,7 @@ const handleLogin = () => {
   if (errorFound) return
 
   // ✅ Redirect or submit logic
-  // router.push('/dashboard')
+  router.push('/onboarding')
 }
 </script>
 
