@@ -30,8 +30,8 @@
     <!-- <div class="md:flex md:justify-center items-center px-8 bg-[#FDFDFD] w-full">
       <slot />
     </div> -->
-     <div class="flex justify-center items-center w-full min-h-screen px-6 md:bg-[#ffffff]
-     bg-white bg-gradient-to-br from-[#000FE224] via-white to-[#000FE234] md:bg-none">
+     <div class="flex justify-center items-center w-full min-h-screen px-0 md:px-6 md:bg-[#ffffff]
+     bg-white bg-gradient-to-br from-[#000FE224] via-white to-[#000FE234] bg-none">
       <slot />
     </div>
   </div>

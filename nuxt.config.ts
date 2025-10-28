@@ -5,12 +5,6 @@ export default defineNuxtConfig({
   modules: ['@pinia/nuxt', '@nuxt/icon', '@nuxt/test-utils', '@nuxtjs/tailwindcss'],
 
   css: ['~/assets/css/tailwind.css'],
-  postcss: {
-    plugins: {
-      tailwindcss: {},
-      autoprefixer: {},
-    },
-  },
 
   icon: {
     provider: 'iconify',

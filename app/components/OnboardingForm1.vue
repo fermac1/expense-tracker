@@ -32,6 +32,10 @@ const isFormComplete = computed(() => {
     store.spendingInsights.length > 0
   )
 })
+
+onMounted(() => {
+  store.ensureDefaults()
+})
 </script>
 
 <template>

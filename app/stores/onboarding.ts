@@ -8,12 +8,20 @@ export const useOnboardingStore = defineStore('onboarding', {
     spendingInsights: [] as string[],
 
     // Form 2 fields
-    name: '' as string,
-    incomeSource: '' as string,
-    budgetTarget: '' as string,
+    incomeDuration: [] as string[],
+    income: [] as string[],
+    budgetTarget: [] as string[],
   }),
 
   actions: {
+  ensureDefaults() {
+    this.moneyGoals ||= []
+    this.trackingMethods ||= []
+    this.spendingInsights ||= []
+    this.incomeDuration ||= []
+    this.income ||= []
+    this.budgetTarget ||= []
+  },
     // Form 1 setters
    setMoneyGoal(goal: string) {
       const index = this.moneyGoals.indexOf(goal)
@@ -29,14 +37,17 @@ export const useOnboardingStore = defineStore('onboarding', {
     },
 
     // Form 2 setters
-    setName(value: string) {
-      this.name = value
+    setIncomeDuration(iDuration: string) {
+      const index = this.incomeDuration.indexOf(iDuration)
+      index === -1 ? this.incomeDuration.push(iDuration) : this.incomeDuration.splice(index, 1)
     },
-    setIncomeSource(value: string) {
-      this.incomeSource = value
+    setIncome(incomeVal: string) {
+      const index = this.income.indexOf(incomeVal)
+      index === -1 ? this.income.push(incomeVal) : this.income.splice(index, 1)
     },
-    setBudgetTarget(value: string) {
-      this.budgetTarget = value
+    setBudgetTarget(budget: string) {
+      const index = this.budgetTarget.indexOf(budget)
+      index === -1 ? this.budgetTarget.push(budget) : this.budgetTarget.splice(index, 1)
     },
 
     nextStep() {
