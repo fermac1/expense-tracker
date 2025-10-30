@@ -33,6 +33,7 @@
 
     <!-- CTA Button -->
     <button
+      @click="$router.push('/dashboard')"
       class="mt-8 w-full max-w-[600px] text-white bg-[#13003D] px-8 py-3 rounded-full text-[12px] md:text-[16px] font-bold font-plusJakartaSans"
     >
       Let's Go
