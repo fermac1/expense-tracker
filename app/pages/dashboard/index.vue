@@ -9,7 +9,7 @@ import { storeToRefs } from 'pinia'
 
 import { useRouter } from 'vue-router'
 const router = useRouter()
-
+const sidebarFormOpen = ref(false)
 
 const { pageTitle } = usePageTitle()
 pageTitle.value = 'Dashboard'
@@ -29,30 +29,32 @@ useHead({
             <p class="text-[#37404E] text-[12px] font-light mb-6">Here's a quick look at your spending and income.</p>
         </div>
         <div>
-            <button class="shadow bg-[#6D2FF9] text-[#ffffff] px-4 py-3 rounded-full">
-                <Icon name="bi:plus" />
-                <span class="font-medium text-[13px]">Add Expense</span>   
+            <button @click="sidebarFormOpen = true" class="flex flex-row shadow bg-[#6D2FF9] text-[#ffffff] px-4 md:py-3 py-2 rounded-full">
+                <span>
+                    <Icon name="bi:plus" />
+                </span>
+                <span class="font-medium md:text-[13px] text-[11px]">Add Expense</span>   
             </button>
         </div>
     </div>
 
     <!-- Overview Cards -->
      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10 w-full">
-        <div class="bg-[#ECC94B12] rounded-[12px] px-4 py-6 text-[#5C4800]">
+        <div class="bg-[#ECC94B12] rounded-[12px] px-4 py-6 text-[#5C4800] bg-[url('../../../images/yellow-bg-pattern.png')] bg-no-repeat bg-contain">
             <div class="flex flex-row gap-2 mb-10">
                 <span class="bg-[#ECC94B33] px-1 py-1 rounded-[4px]"><img src="./../../../icons/wallet.png" alt="wallet" /></span>
                 <p class="text-[13px] font-medium">Estimated income</p>
             </div>
             <p class="text-[24px] font-bold"><del>N</del>50,000</p>
         </div>
-        <div class="bg-[#8B5CF612] rounded-[12px] px-4 py-6 text-[#1C005C]">
+        <div class="bg-[#8B5CF612] rounded-[12px] px-4 py-6 text-[#1C005C]  bg-[url('../../../images/purple-bg-pattern.png')] bg-no-repeat bg-contain">
             <div class="flex flex-row gap-2 mb-10">
                 <span class="bg-[#8B5CF633] p-1 rounded-[4px]"><img src="./../../../icons/coin.png" alt="coin" /></span>
                 <p class="text-[13px] font-medium">Total Expenses</p>
             </div>
             <p class="text-[24px] font-bold"><del>N</del>50,000</p>
         </div>
-        <div class="bg-[#F0F4FD] rounded-[12px] px-4 py-6 text-[#0D0D4F]">
+        <div class="bg-[#F0F4FD] rounded-[12px] px-4 py-6 text-[#0D0D4F]  bg-[url('../../../images/blue-bg-pattern.png')] bg-no-repeat bg-contain">
             <div class="flex flex-row gap-2 mb-10">
                 <span class="bg-[#2563EB38] p-1 rounded-[4px]"><img src="./../../../icons/level.png" alt="level" /></span>
                 <p class="text-[13px] font-medium">Total count</p>
@@ -171,6 +173,8 @@ useHead({
       </div>
         
     </div>
+
+    <ExpenseDetails :open="sidebarFormOpen" :onClose="() => sidebarFormOpen = false" />
 
   </div>
 </template>

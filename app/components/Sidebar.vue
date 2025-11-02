@@ -3,7 +3,7 @@
 
     <aside
       :class="[
-        'bg-white shadow-md transition-all duration-300 ease-in-out z-40',
+        'bg-white bg-[url(\'../../../images/yellow-bg-pattern.png\')] bg-no-repeat bg-contain bg-[position:bottom_right] shadow-md transition-all duration-300 ease-in-out z-40',
         isSidebarOpen ? 'w-[70vw]' : 'w-64',  // Sidebar takes 70% width of the screen on mobile when open
         !isMobile ? 'md:w-64' : '',  // Keep 64px on desktop
         isMobile

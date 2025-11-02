@@ -9,18 +9,21 @@
       <Icon name="heroicons:bars-3" class="w-6 h-6" />
     </button>
 
-     <p class="text-[#1F1F1F] text-[14px] font-semibold">{{ pageTitle }}</p>
-
+     <!-- <p class="text-[#1F1F1F] text-[14px] font-semibold">{{ pageTitle }}</p> -->
+    <p></p>
 
     <div class="flex items-center space-x-4 relative">
      
-      <button class="relative">
-        <div class="border border-[#F0F0F0] rounded-full px-3 py-2">
-          <Icon name="iconoir:bell" class="w-6 h-6 text-[#424242]" />
+      <button class="">
+        <div class="bg-[#71809614] rounded-full px-3 py-2">
+          <Icon name="system-uicons:bell" class="w-6 h-6 text-[#424242]" />
         </div>
-        <span class="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full px-1">1</span>
       </button>
-      <img src="" alt="User" class="rounded-full w-8 h-8 cursor-pointer"  @click="toggleDropdown"/>
+      <img src="./../../images/avatar.png" alt="User" class="rounded-full w-10 h-10 cursor-pointer"  @click="toggleDropdown"/>
+      <div>
+        <p class="text-[#111827] text-[14px] font-medium">Sunny Ade</p>
+        <p class="text-[#11182773] text-[10px] font-meduim">sunny@gmail.com</p>
+      </div>
 
        <!-- Dropdown Menu -->
       <div
