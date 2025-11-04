@@ -1,5 +1,5 @@
 <template>
-  <div class="flex min-h-screen bg-[#F1F1F1]">
+  <div class="flex min-h-screen bg-[#ffffff]">
     <!-- Sidebar -->
     <Sidebar :class="{ 'hidden': !isSidebarOpen && isMobile }" :isMobile="isMobile" @closeSidebar="toggleSidebar"/>
 

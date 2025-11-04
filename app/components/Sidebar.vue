@@ -52,12 +52,12 @@
         <!-- Task Management Link -->
         <li>
           <NuxtLink
-            to="/dashboard/tasks"
+            to="/dashboard/analytics"
             class="flex items-center space-x-2 px-6 py-3 rounded-[6px] hover:bg-[#000CB00A]"
-            :class="isActive('/dashboard/tasks') ? 'bg-[#000CB00A] text-[#000CB0] font-bold' : 'text-gray-700'"
+            :class="isActive('/dashboard/analytics') ? 'bg-[#000CB00A] text-[#000CB0] font-bold' : 'text-gray-700'"
             @click="emitCloseSidebar" 
           >
-            <Icon name="solar:chart-2-outline" :class="isActive('/dashboard/tasks') ? 'text-[#000CB0]' : ''" />
+            <Icon name="solar:chart-2-outline" :class="isActive('/dashboard/analytics') ? 'text-[#000CB0]' : ''" />
             <span class="text-[11px]">Analytics</span>
           </NuxtLink>
         </li>
