@@ -19,7 +19,7 @@
           <Icon name="system-uicons:bell" class="w-6 h-6 text-[#424242]" />
         </div>
       </button>
-      <img src=".//images/avatar.png" alt="User" class="rounded-full w-10 h-10 cursor-pointer"  @click="toggleDropdown"/>
+      <img src="/images/avatar.png" alt="User" class="rounded-full w-10 h-10 cursor-pointer"  @click="toggleDropdown"/>
       <div>
         <p class="text-[#111827] text-[14px] font-medium">Sunny Ade</p>
         <p class="text-[#11182773] text-[10px] font-meduim">sunny@gmail.com</p>
