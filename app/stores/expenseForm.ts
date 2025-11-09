@@ -12,7 +12,7 @@ interface Expense {
   createdAt: string
 }
 
-export const useExpenseStore = defineStore('expense', () => {
+export const useExpenseFormStore = defineStore('expense-form', () => {
   // --- State ---
   const expenses = ref<Expense[]>([])
   const budgetTarget = ref<string[]>([])

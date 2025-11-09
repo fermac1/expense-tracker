@@ -34,11 +34,15 @@
             <div class="rounded-[12px] md:col-span-2 border border-[#EDEFF3] p-4">
                 <div class="text-[#010101] mb-4">
                     <h1 class="text-[15px] font-bold mb-2">Expense breakdown</h1>
-                    <p class="text-[12px] font-light mb-6">Here's your month in numbers</p>
+                    <p class="text-[12px] font-light">Here's your month in numbers</p>
                 </div>
+                <!-- <div class="h-screen bg-white px-4 md:px-8 py-12"> -->
+                   <ExpenseList />
+                <!-- </div> -->
+
             </div>
             <div class="rounded-[12px] md:col-span-3 border border-[#EDEFF3] p-4">
-                <div class="flex flex-col md:flex-row justify-between mb-4">
+                <!-- <div class="flex flex-col md:flex-row justify-between mb-4">
                     <div class="text-[#010101]">
                         <h1 class="text-[15px] font-bold mb-2">Your Spending insights</h1>
                         <p class="text-[12px] font-light mb-6">Here's a breakdown of your year in numbers</p>
@@ -51,6 +55,10 @@
                             </span>
                         </button>
                     </div>
+                </div> -->
+
+                <div class="min-h-screen flex justify-center items-start py-4 px-6">
+                    <SpendingChart />
                 </div>
             </div>
         </div>

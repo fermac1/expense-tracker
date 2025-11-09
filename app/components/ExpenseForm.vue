@@ -15,7 +15,7 @@ const props = defineProps<{
 // Success modal
 const showModal = ref(false)
 // const userStore = useUserStore()
-const store = useExpenseStore()
+const store = useExpenseFormStore()
 
 // Access user info
 // const userName = userStore.email
@@ -93,13 +93,13 @@ const selectMethod = (method: string) => {
   showDropdown.value = false
 }
 
-watch(
-  () => store.form,
-  (newVal) => {
-    console.log('🧾 Form data updated:', JSON.parse(JSON.stringify(newVal)))
-  },
-  { deep: true, immediate: true }
-)
+// watch(
+//   () => store.form,
+//   (newVal) => {
+//     console.log('🧾 Form data updated:', JSON.parse(JSON.stringify(newVal)))
+//   },
+//   { deep: true, immediate: true }
+// )
 
 const isFormComplete = computed(() => {
   return (
