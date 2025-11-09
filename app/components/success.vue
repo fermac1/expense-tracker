@@ -21,8 +21,8 @@
         </button>
       </div>
         <div class="flex flex-col items-center justify-center font-satoshi">
-            <div class="bg-[url('../../images/success-bg.png')] rounded-full p-6">
-                <img src="../../images/success-img.png" alt="">
+            <div class="bg-[url('/images/success-bg.png')] rounded-full p-6">
+                <img src="/images/success-img.png" alt="">
             </div>
             <p class="text-[#111827] text-[18px] font-light mt-2">Expense ticket added successfully</p>
         </div>

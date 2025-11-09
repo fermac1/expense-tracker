@@ -130,7 +130,7 @@ const addSubtask = () => {
         <div class="border border-[#E6E6E673] rounded-[12px] overflow-y-auto">
             <div class="flex flex-row justify-between border border-b">
                 <p class="text-[#2B2B2B] text-[14px] font-bold m-4">Expense ticket details #</p>
-                <img src="../../images/details-doodle.png" alt="">
+                <img src="/images/details-doodle.png" alt="">
             </div>
 
             <div class="grid grid-cols-2 p-6">
@@ -142,7 +142,7 @@ const addSubtask = () => {
                     <p>Date</p>
                 </div>
                 <div class="text-right text-[13px] font-normal space-y-4">
-                    <p class="flex flex-row gap-2 justify-end"><img src="../../icons/bag.png" alt="bag" class="bg-[#3030CF12] rounded-full p-2 md:w-[12%]"> <span class="text-[#2B2B2B]">Shopping</span></p>
+                    <p class="flex flex-row gap-2 justify-end"><img src="/icons/bag.png" alt="bag" class="bg-[#3030CF12] rounded-full p-2 md:w-[12%]"> <span class="text-[#2B2B2B]">Shopping</span></p>
                     <p class="text-[14px] font-bold text-[#111827F2]">N10,000</p>
                     <p>Shopping</p>
                     <p class="text-[#111827F2]">Bought groceries</p>

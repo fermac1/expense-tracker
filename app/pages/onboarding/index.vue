@@ -37,8 +37,8 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useOnboardingStore } from '@/stores/onboarding'
-import OnboardingForm1 from '../../components/OnboardingForm1.vue'
-import OnboardingForm2 from '../../components/OnboardingForm2.vue'
+import OnboardingForm1 from '/components/OnboardingForm1.vue'
+import OnboardingForm2 from '/components/OnboardingForm2.vue'
 
 definePageMeta({
   layout: 'onboarding-layout'
