@@ -3,7 +3,7 @@
 
     <aside
       :class="[
-        'bg-white relative bg-[url(\'../../../images/sidebar-bg.png\')] bg-no-repeat bg-contain bg-[position:bottom_right] shadow-md transition-all duration-300 ease-in-out z-40',
+        'bg-white relative bg-[url(\'/images/sidebar-bg.png\')] bg-no-repeat bg-contain bg-[position:bottom_right] shadow-md transition-all duration-300 ease-in-out z-40',
         isSidebarOpen ? 'w-[70vw]' : 'w-64',  // Sidebar takes 70% width of the screen on mobile when open
         !isMobile ? 'md:w-64' : '',  // Keep 64px on desktop
         isMobile
@@ -11,7 +11,7 @@
       ]"
     >
 
-    <img src="../../../images/sidebar-bg.png" class="absolute bottom-0 right-0">
+    <img src="/images/sidebar-bg.png" class="absolute bottom-0 right-0">
     <div class="px-6 py-7 text-[15px] font-bold text-[#1F1F1F] flex justify-between">
       <span>
         <span class="text-[#2525B1]">Expense </span>

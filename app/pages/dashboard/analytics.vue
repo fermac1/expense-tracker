@@ -7,23 +7,23 @@
 
         <!-- Overview Cards -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10 w-full">
-            <div class="bg-[#ECC94B12] rounded-[12px] px-4 py-6 text-[#5C4800] bg-[url('../../../images/yellow-bg-pattern.png')] bg-no-repeat bg-contain">
+            <div class="bg-[#ECC94B12] rounded-[12px] px-4 py-6 text-[#5C4800] bg-[url('/images/yellow-bg-pattern.png')] bg-no-repeat bg-contain">
                 <div class="flex flex-row gap-2 mb-10">
-                    <span class="bg-[#ECC94B33] px-1 py-1 rounded-[4px]"><img src="./../../../icons/wallet.png" alt="wallet" /></span>
+                    <span class="bg-[#ECC94B33] px-1 py-1 rounded-[4px]"><img src=".//icons/wallet.png" alt="wallet" /></span>
                     <p class="text-[13px] font-medium">Total spent</p>
                 </div>
                 <p class="text-[20px] md:text-[24px] font-bold"><del>N</del>50,000</p>
             </div>
-            <div class="bg-[#8B5CF612] rounded-[12px] px-4 py-6 text-[#1C005C]  bg-[url('../../../images/purple-bg-pattern.png')] bg-no-repeat bg-contain">
+            <div class="bg-[#8B5CF612] rounded-[12px] px-4 py-6 text-[#1C005C]  bg-[url('/images/purple-bg-pattern.png')] bg-no-repeat bg-contain">
                 <div class="flex flex-row gap-2 mb-10">
-                    <span class="bg-[#8B5CF633] p-1 rounded-[4px]"><img src="./../../../icons/coin.png" alt="coin" /></span>
+                    <span class="bg-[#8B5CF633] p-1 rounded-[4px]"><img src=".//icons/coin.png" alt="coin" /></span>
                     <p class="text-[13px] font-medium">Average daily spend</p>
                 </div>
                 <p class="text-[20px] md:text-[24px] font-bold"><del>N</del>50,000</p>
             </div>
-            <div class="bg-[#F0F4FD] rounded-[12px] px-4 py-6 text-[#0D0D4F]  bg-[url('../../../images/blue-bg-pattern.png')] bg-no-repeat bg-contain">
+            <div class="bg-[#F0F4FD] rounded-[12px] px-4 py-6 text-[#0D0D4F]  bg-[url('/images/blue-bg-pattern.png')] bg-no-repeat bg-contain">
                 <div class="flex flex-row gap-2 mb-10">
-                    <span class="bg-[#2563EB38] p-1 rounded-[4px]"><img src="./../../../icons/level.png" alt="level" /></span>
+                    <span class="bg-[#2563EB38] p-1 rounded-[4px]"><img src=".//icons/level.png" alt="level" /></span>
                     <p class="text-[13px] font-medium">Daily count</p>
                 </div>
                 <p class="text-[20px] md:text-[24px] font-bold">50</p>

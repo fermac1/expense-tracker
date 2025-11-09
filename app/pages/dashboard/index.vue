@@ -41,23 +41,23 @@ useHead({
 
     <!-- Overview Cards -->
      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10 w-full">
-        <div class="bg-[#ECC94B12] rounded-[12px] px-4 py-6 text-[#5C4800] bg-[url('../../../images/yellow-bg-pattern.png')] bg-no-repeat bg-contain">
+        <div class="bg-[#ECC94B12] rounded-[12px] px-4 py-6 text-[#5C4800] bg-[url('/images/yellow-bg-pattern.png')] bg-no-repeat bg-contain">
             <div class="flex flex-row gap-2 mb-10">
-                <span class="bg-[#ECC94B33] px-1 py-1 rounded-[4px]"><img src="./../../../icons/wallet.png" alt="wallet" /></span>
+                <span class="bg-[#ECC94B33] px-1 py-1 rounded-[4px]"><img src=".//icons/wallet.png" alt="wallet" /></span>
                 <p class="text-[13px] font-medium">Estimated income</p>
             </div>
             <p class="text-[20px] md:text-[24px] font-bold"><del>N</del>50,000</p>
         </div>
-        <div class="bg-[#8B5CF612] rounded-[12px] px-4 py-6 text-[#1C005C]  bg-[url('../../../images/purple-bg-pattern.png')] bg-no-repeat bg-contain">
+        <div class="bg-[#8B5CF612] rounded-[12px] px-4 py-6 text-[#1C005C]  bg-[url('/images/purple-bg-pattern.png')] bg-no-repeat bg-contain">
             <div class="flex flex-row gap-2 mb-10">
-                <span class="bg-[#8B5CF633] p-1 rounded-[4px]"><img src="./../../../icons/coin.png" alt="coin" /></span>
+                <span class="bg-[#8B5CF633] p-1 rounded-[4px]"><img src=".//icons/coin.png" alt="coin" /></span>
                 <p class="text-[13px] font-medium">Total Expenses</p>
             </div>
             <p class="text-[20px] md:text-[24px] font-bold"><del>N</del>50,000</p>
         </div>
-        <div class="bg-[#F0F4FD] rounded-[12px] px-4 py-6 text-[#0D0D4F]  bg-[url('../../../images/blue-bg-pattern.png')] bg-no-repeat bg-contain">
+        <div class="bg-[#F0F4FD] rounded-[12px] px-4 py-6 text-[#0D0D4F]  bg-[url('/images/blue-bg-pattern.png')] bg-no-repeat bg-contain">
             <div class="flex flex-row gap-2 mb-10">
-                <span class="bg-[#2563EB38] p-1 rounded-[4px]"><img src="./../../../icons/level.png" alt="level" /></span>
+                <span class="bg-[#2563EB38] p-1 rounded-[4px]"><img src=".//icons/level.png" alt="level" /></span>
                 <p class="text-[13px] font-medium">Total count</p>
             </div>
             <p class="text-[20px] md:text-[24px] font-bold">50</p>
@@ -116,7 +116,7 @@ useHead({
             <div class="flex flex-col gap-6 mt-4">
                 <div class="flex items-center gap-3 border border-dashed border-[#001D5C] p-3 rounded-full">
                     <div class="bg-[rgba(37,99,235,0.2)] p-2 rounded-full w-fit">
-                    <img src="./../../../icons/card-send.png" alt="Card send icon" class="w-4 h-4">
+                    <img src=".//icons/card-send.png" alt="Card send icon" class="w-4 h-4">
                     </div>
                     <div>
                     <p class="text-[#001D5C] text-xs font-bold">
@@ -130,7 +130,7 @@ useHead({
 
                 <div class="flex items-center gap-3 border border-dashed border-[rgba(37,99,235,0.4)] p-3 rounded-full">
                     <div class="bg-[#ECC94B33] p-2 rounded-full w-fit">
-                        <img src="./../../../icons/percentage-circle.png" alt="Card send icon" class="w-4 h-4">
+                        <img src=".//icons/percentage-circle.png" alt="Card send icon" class="w-4 h-4">
                     </div>
                     <div>
                     <p class="text-[#5C4800] text-xs font-bold">
@@ -144,7 +144,7 @@ useHead({
 
                 <div class="flex items-center gap-3 border border-dashed border-[#5C0000] p-3 rounded-full">
                     <div class="bg-[#F5656533] p-2 rounded-full w-fit">
-                    <img src="./../../../icons/danger.png" alt="Card send icon" class="w-4 h-4">
+                    <img src=".//icons/danger.png" alt="Card send icon" class="w-4 h-4">
                     </div>
                     <div>
                     <p class="text-[#5C0000] text-xs font-bold">
@@ -158,7 +158,7 @@ useHead({
 
                 <div class="flex items-center gap-3 border border-dashed border-[#15472A] p-3 rounded-full">
                     <div class="bg-[#48BB7833] p-2 rounded-full w-fit">
-                    <img src="./../../../icons/card-send.png" alt="Card send icon" class="w-4 h-4">
+                    <img src=".//icons/card-send.png" alt="Card send icon" class="w-4 h-4">
                     </div>
                     <div>
                     <p class="text-[#15472A] text-xs font-bold">
