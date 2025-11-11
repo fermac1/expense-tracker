@@ -2,10 +2,9 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  modules: ['@pinia/nuxt', '@nuxt/icon', '@nuxt/test-utils', '@nuxtjs/tailwindcss'],
+  modules: ['@pinia/nuxt', '@nuxt/icon', '@nuxt/test-utils', '@nuxtjs/tailwindcss', 'pinia-plugin-persistedstate/nuxt'],
 
   css: ['~/assets/css/tailwind.css'],
-
   icon: {
     provider: 'iconify',
   },

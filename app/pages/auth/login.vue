@@ -111,7 +111,7 @@ import { ref, reactive, computed } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
-
+const auth = useAuthStore()
 const isEmailFocused = ref(false)
 const isPasswordFocused = ref(false)
 
@@ -147,6 +147,9 @@ const handleLogin = () => {
   }
 
   if (errorFound) return
+
+  // ✅ Client-side login
+  auth.login(form.email, form.password)
 
   // ✅ Redirect or submit logic
   router.push('/onboarding')

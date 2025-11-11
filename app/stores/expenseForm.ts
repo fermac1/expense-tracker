@@ -1,15 +1,28 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-
+import SecureLS from 'secure-ls'
 
 interface Expense {
   id: number
   amount: string
   paymentMethod: string
   description: string
-  category: string
+  category: string[]
   date: string
   createdAt: string
+}
+
+// const ls = new SecureLS({
+//   encodingType: 'des',
+//   encryptionSecret: '@#987asdui@'
+// })
+
+let ls: SecureLS | null = null
+if (process.client) {
+  ls = new SecureLS({
+    encodingType: 'des',
+    encryptionSecret: '@#987asdui@'
+  })
 }
 
 export const useExpenseFormStore = defineStore('expense-form', () => {
@@ -22,7 +35,7 @@ export const useExpenseFormStore = defineStore('expense-form', () => {
     paymentMethod: '',
     description: '',
     date: new Date().toISOString().split('T')[0],
-    category: ''
+    category: [] as string[]
   })
 
   // --- Actions ---
@@ -46,6 +59,7 @@ export const useExpenseFormStore = defineStore('expense-form', () => {
       createdAt: new Date().toISOString()
     }
 
+    console.log('hgfghjk', newExpense)
     expenses.value.push(newExpense)
     resetForm()
   }
@@ -55,7 +69,7 @@ export const useExpenseFormStore = defineStore('expense-form', () => {
     form.value.paymentMethod = ''
     form.value.description = ''
     form.value.date = new Date().toISOString().split('T')[0]
-    form.value.category = ''
+    form.value.category = []
   }
 
   const toggleSelection = (list: string[], value: string) => {
@@ -64,23 +78,41 @@ export const useExpenseFormStore = defineStore('expense-form', () => {
     else list.splice(index, 1)
   }
 
+  // const selectBudgetTarget = (budget: string) => {
+  //   toggleSelection(budgetTarget.value, budget)
+  //   form.value.category = budget
+  // }
+
   const selectBudgetTarget = (budget: string) => {
     toggleSelection(budgetTarget.value, budget)
-    form.value.category = budget
+    form.value.category = [...budgetTarget.value]
   }
 
   const isSelected = (value: string) => budgetTarget.value.includes(value)
 
   return {
-    // state
     expenses,
     budgetTarget,
     form,
 
-    // actions
     addExpense,
     resetForm,
     selectBudgetTarget,
     isSelected
   }
+}, {
+     persist: process.client
+      ? {
+          storage: {
+            getItem: (key) => ls?.get(key),
+            setItem: (key, value) => ls?.set(key, value)
+          }
+        }
+      : false
+    // storage: {
+    //   getItem: (key) => ls.get(key),
+    //   setItem: (key, value) => ls.set(key, value),
+    //   // removeItem: (key) => ls.remove(key)
+    // }
+  
 })

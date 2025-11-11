@@ -21,8 +21,8 @@
       </button>
       <img src="/images/avatar.png" alt="User" class="rounded-full w-10 h-10 cursor-pointer"  @click="toggleDropdown"/>
       <div>
-        <p class="text-[#111827] text-[14px] font-medium">Sunny Ade</p>
-        <p class="text-[#11182773] text-[10px] font-meduim">sunny@gmail.com</p>
+        <p class="text-[#111827] text-[14px] font-medium">{{ user?.name }}</p>
+        <p class="text-[#11182773] text-[10px] font-meduim">{{ user?.email }}</p>
       </div>
 
        <!-- Dropdown Menu -->
@@ -64,5 +64,7 @@ const toggleDropdown = () => {
   isDropdownOpen.value = !isDropdownOpen.value
 }
 
+const auth = useAuthStore()
+const user = computed(() => auth.user)
 
 </script>

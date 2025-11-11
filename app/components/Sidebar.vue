@@ -18,7 +18,7 @@
         <span class="text-[#4F02FD]">tracker</span>
       </span>
 
-       <span class="rounded-full border border-[#7180961A] px-1.5 py-1/2 cursor-pointer">
+       <span class="rounded-full border border-[#7180961A] px-1.5 py-1/2 cursor-pointer" @click="logout">
         <Icon name="solar:logout-outline" class="mt-1" />
        </span>
 
@@ -85,4 +85,12 @@ const emitCloseSidebar = () => {
   }
 }
 const isActive = (path: string) => route.path === path
+
+const auth = useAuthStore()
+const user = computed(() => auth.user)
+
+function logout() {
+  auth.logout()
+  navigateTo('/auth/login')
+}
 </script>

@@ -5,7 +5,7 @@ definePageMeta({
 
 import { usePageTitle } from '~/composables/usePageTitle'
 import { storeToRefs } from 'pinia'
-
+import { useAuthStore } from '~/stores/auth'
 
 import { useRouter } from 'vue-router'
 const router = useRouter()
@@ -19,6 +19,46 @@ useHead({
   title: pageTitle.value
 })
 
+const store = useExpenseFormStore()
+
+// Selected expense for "single view"
+const selectedExpense = ref<typeof store.expenses[0] | null>(null)
+
+// Pagination setup
+const currentPage = ref(1)
+const perPage = 5
+
+// Compute total pages
+const totalPages = computed(() => {
+  return Math.ceil(store.expenses.length / perPage)
+})
+
+// Paginated list
+const paginatedExpenses = computed(() => {
+  // Sort by date (most recent first)
+ const sorted = [...store.expenses].sort((a, b) => {
+  return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+})
+
+  // Slice for pagination
+  const start = (currentPage.value - 1) * perPage
+  return sorted.slice(start, start + perPage)
+})
+
+// Select an expense to view details
+const viewExpense = (expense: typeof store.expenses[0]) => {
+    selectedExpense.value = expense
+    sidebarDetailsOpen.value = true
+}
+
+// Pagination actions
+const nextPage = () => {
+  if (currentPage.value < totalPages.value) currentPage.value++
+}
+
+const prevPage = () => {
+  if (currentPage.value > 1) currentPage.value--
+}
 
 </script>
 
@@ -92,20 +132,46 @@ useHead({
                     </thead>
         
                     <tbody class="">
-                        <tr class="border-b border-[#E5E7EB] hover:bg-[#F9FAFB] transition" @click="sidebarDetailsOpen = true" >
-                        <td class="text-[#2E2E2E] text-[13px] p-4">pt</td>
-                        <td class="text-[#2E2E2E] text-[13px] p-4">prrr</td>
-                        <td class="text-[#2E2E2E] text-[13px] p-4">₦2000</td>
-                        <td class="text-[#2E2E2E] text-[13px] p-4">2025-10-28</td>
+                        <tr class="border-b border-[#E5E7EB] hover:bg-[#F9FAFB] transition"
+                         v-for="(expense, index) in paginatedExpenses"
+                        :key="index"
+                         @click="viewExpense(expense)" >
+                         <!-- {{ expense.category.join(', ') }} -->
+                        <td class="text-[#2E2E2E] text-[13px] p-4">user</td>
+                        <td class="text-[#2E2E2E] text-[13px] p-4">{{ expense.description }}</td>
+                        <td class="text-[#2E2E2E] text-[13px] p-4">{{ expense.amount }}</td>
+                        <td class="text-[#2E2E2E] text-[13px] p-4">{{ expense.date }}</td>
                         </tr>
-                        <tr class="border-b border-[#E5E7EB] hover:bg-[#F9FAFB] transition">
-                        <td class="text-[#2E2E2E] text-[13px] p-4">Transport</td>
-                        <td class="text-[#2E2E2E] text-[13px] p-4">Bus to work</td>
-                        <td class="text-[#2E2E2E] text-[13px] p-4">₦800</td>
-                        <td class="text-[#2E2E2E] text-[13px] p-4">2025-10-27</td>
+                        <tr v-if="!store.expenses.length">
+                            <td colspan="4" class="text-center text-gray-400 py-6">No expenses recorded</td>
                         </tr>
+
                     </tbody>
+                    
                 </table>  
+                <!-- Pagination controls -->
+                <div
+                    v-if="totalPages > 1"
+                    class="flex justify-center items-center gap-4 mt-4 text-sm"
+                >
+                    <button
+                    @click="prevPage"
+                    :disabled="currentPage === 1"
+                    class="px-3 py-1 border rounded-md text-[#00065C] disabled:opacity-40"
+                    >
+                    Previous
+                    </button>
+                    <span class="text-gray-600">
+                    Page {{ currentPage }} of {{ totalPages }}
+                    </span>
+                    <button
+                    @click="nextPage"
+                    :disabled="currentPage === totalPages"
+                    class="px-3 py-1 border rounded-md text-[#00065C] disabled:opacity-40"
+                    >
+                    Next
+                    </button>
+                </div>
             </div>
       </div>
 
@@ -175,7 +241,7 @@ useHead({
         
     </div>
 
-    <ExpenseDetails :open="sidebarDetailsOpen" :onClose="() => sidebarDetailsOpen = false" />
+    <ExpenseDetails :open="sidebarDetailsOpen" :onClose="() => sidebarDetailsOpen = false"  :expense="selectedExpense"/>
     <ExpenseForm :open="sidebarFormOpen" :onClose="() => sidebarFormOpen = false" />
 
   </div>

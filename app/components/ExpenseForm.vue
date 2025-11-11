@@ -29,23 +29,19 @@ const date = ref(today) // YYYY-MM-DD
 const priority = ref<string>("")
 const category = ref<string>("")
 const description = ref("")
-const title = ref("")
+const amount = ref("")
 
 const success = ref(false)
 // Reset form
-const resetForm = () => {
-  title.value = ""
-  date.value = ''
-  subtasks.value = [{ title: '', completed: false }]
-  priority.value = ""
-  category.value = ""
-  description.value = ""
-}
+// const resetForm = () => {
+//   amount.value = ""
+//   date.value = ''
+//   subtasks.value = [{ title: '', completed: false }]
+//   priority.value = ""
+//   category.value = ""
+//   description.value = ""
+// }
 
-// const subtasks = ref<string[]>([])
-const subtasks = ref<{ title: string; completed: boolean }[]>([
-  { title: '', completed: false }
-])
 
 const budgetTarget = ['Shopping', 'Subscription', 'Housing', 'Food', 'Transportation']
 
@@ -74,11 +70,14 @@ const selectBudgetTarget = (budget: string) => {
   toggleSelection(store.budgetTarget, budget)
 
   // Set form category to the most recent clicked category
-  store.form.category = budget
+  // store.form.category = budget
+    store.form.category = [...store.budgetTarget]
   console.log('📦 Selected category:', store.form.category)
 }
 
 const isSelected = (list: string[], value: string) => list.includes(value)
+// const isSelected = (value: string) => store.budgetTarget.includes(value)
+
 
 const paymentMethods = [
   { label: 'Cash', value: 'Cash', icon: 'hugeicons:money-01' },
@@ -112,49 +111,9 @@ const isFormComplete = computed(() => {
 
 // Submit form'
 const handleSubmit = () => {
-    store.addExpense()
-    success.value = true
-}
-// const handleSubmit = () => {
-//   if (!title.value.trim()) {
-//     alert("Please enter a title for the task")
-//     return
-//   }
-
-//   if (!priority.value || !category.value) {
-//     alert("Please select priority and category")
-//     return
-//   }
-
-//   const structuredSubtasks = subtasks.value
-//     .filter(s => s.title.trim()) // Remove empty titles
-//     .map(s => ({
-//       title: s.title.trim(),
-//       completed: s.completed
-//   }))
-
-//   const newTodo = {
-//     id: Date.now(),
-//     title: title.value,
-//     description: description.value,
-//     priority: priority.value,
-//     category: category.value,
-//     date: date.value,
-//     isCompleted: false,
-//     createdAt: new Date().toISOString(),
-//     subtasks: structuredSubtasks 
-//   }
-
-//   console.log('subtasks:', subtasks.value)
-
-// //   todoStore.addTodo(newTodo)
-//   resetForm()
-//   openModal()
-
-// }
-
-const addSubtask = () => {
-  subtasks.value.push({ title: '', completed: false })
+  store.addExpense()
+  success.value = true
+  store.resetForm() 
 }
 
 </script>
@@ -201,8 +160,8 @@ const addSubtask = () => {
             <form @submit.prevent="handleSubmit()">
                 <div class="flex flex-col gap-3 p-3">
                     <div class="flex flex-col">
-                        <label for="title" class="text-[#111827] text-[10px] font-semibold uppercase">Amount</label>
-                        <input type="text" name="amount" id="amount" class="border border-[#EBEEF5] rounded-[8px] py-3 px-4 text-[12px]" placeholder="Enter title" v-model="store.form.amount">
+                        <label for="amount" class="text-[#111827] text-[10px] font-semibold uppercase">Amount</label>
+                        <input type="text" name="amount" id="amount" class="border border-[#EBEEF5] rounded-[8px] py-3 px-4 text-[12px]" placeholder="Input amount" v-model="store.form.amount">
                     </div>
 
                     <!-- <div class="flex flex-col">
