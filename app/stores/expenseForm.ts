@@ -29,6 +29,7 @@ export const useExpenseFormStore = defineStore('expense-form', () => {
   // --- State ---
   const expenses = ref<Expense[]>([])
   const budgetTarget = ref<string[]>([])
+  const estimatedIncome = ref<number>(0) 
 
   const form = ref({
     amount: '',
@@ -90,11 +91,22 @@ export const useExpenseFormStore = defineStore('expense-form', () => {
 
   const isSelected = (value: string) => budgetTarget.value.includes(value)
 
+     // --- Computed Totals ---
+  const toNumber = (val: string) => parseFloat(val.replace(/[₦,]/g, '')) || 0
+
+  const totalExpenses = computed(() =>
+    expenses.value.reduce((sum, e) => sum + toNumber(e.amount), 0)
+  )
+
+  const totalCount = computed(() => expenses.value.length)
+
   return {
     expenses,
     budgetTarget,
     form,
-
+    totalExpenses,
+    totalCount,
+    estimatedIncome,
     addExpense,
     resetForm,
     selectBudgetTarget,

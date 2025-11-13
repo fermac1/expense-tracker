@@ -18,7 +18,7 @@
         <span class="text-[#4F02FD]">tracker</span>
       </span>
 
-       <span class="rounded-full border border-[#7180961A] px-1.5 py-1/2 cursor-pointer" @click="logout">
+       <span class="hidden md:inline-block rounded-full border border-[#7180961A] px-1.5 py-1/2 cursor-pointer" @click="logout">
         <Icon name="solar:logout-outline" class="mt-1" />
        </span>
 
@@ -64,6 +64,10 @@
         </li>
       </ul>
     </nav>
+
+      <span class="inline-block md:hidden absolute bottom-3 right-6 rounded-full border border-[#7180961A] px-1.5 py-1/2 cursor-pointer" @click="logout">
+        <Icon name="solar:logout-outline" class="mt-1" />
+      </span>
   </aside>
 </template>
 

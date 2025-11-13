@@ -28,15 +28,34 @@ const selectedExpense = ref<typeof store.expenses[0] | null>(null)
 const currentPage = ref(1)
 const perPage = 5
 
+// Search query
+const searchQuery = ref('')
+
+// --- Filtering ---
+const filteredExpenses = computed(() => {
+  const q = searchQuery.value.trim().toLowerCase()
+  if (!q) return store.expenses
+
+  return store.expenses.filter((e) => {
+    return (
+      e.description.toLowerCase().includes(q) ||
+      e.amount.toLowerCase().includes(q) ||
+      e.category.join(', ').toLowerCase().includes(q) ||
+      e.paymentMethod.toLowerCase().includes(q) ||
+      e.date.toLowerCase().includes(q)
+    )
+  })
+})
+
 // Compute total pages
 const totalPages = computed(() => {
-  return Math.ceil(store.expenses.length / perPage)
+  return Math.ceil(filteredExpenses.value.length / perPage)
 })
 
 // Paginated list
 const paginatedExpenses = computed(() => {
   // Sort by date (most recent first)
- const sorted = [...store.expenses].sort((a, b) => {
+ const sorted = [...filteredExpenses.value].sort((a, b) => {
   return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
 })
 
@@ -59,6 +78,17 @@ const nextPage = () => {
 const prevPage = () => {
   if (currentPage.value > 1) currentPage.value--
 }
+
+const formattedIncome = computed(() =>
+  store.estimatedIncome.toLocaleString()
+)
+const formattedExpenses = computed(() =>
+  store.totalExpenses.toLocaleString()
+)
+
+watch(searchQuery, () => {
+  currentPage.value = 1
+})
 
 </script>
 
@@ -86,21 +116,21 @@ const prevPage = () => {
                 <span class="bg-[#ECC94B33] px-1 py-1 rounded-[4px]"><img src="/icons/wallet.png" alt="wallet" /></span>
                 <p class="text-[13px] font-medium">Estimated income</p>
             </div>
-            <p class="text-[20px] md:text-[24px] font-bold"><del>N</del>50,000</p>
+            <p class="text-[20px] md:text-[24px] font-bold"><del>N</del>{{ formattedIncome }}</p>
         </div>
         <div class="bg-[#8B5CF612] rounded-[12px] px-4 py-6 text-[#1C005C]  bg-[url('/images/purple-bg-pattern.png')] bg-no-repeat bg-contain">
             <div class="flex flex-row gap-2 mb-10">
                 <span class="bg-[#8B5CF633] p-1 rounded-[4px]"><img src="/icons/coin.png" alt="coin" /></span>
                 <p class="text-[13px] font-medium">Total Expenses</p>
             </div>
-            <p class="text-[20px] md:text-[24px] font-bold"><del>N</del>50,000</p>
+            <p class="text-[20px] md:text-[24px] font-bold"><del>N</del>{{ formattedExpenses }}</p>
         </div>
         <div class="bg-[#F0F4FD] rounded-[12px] px-4 py-6 text-[#0D0D4F]  bg-[url('/images/blue-bg-pattern.png')] bg-no-repeat bg-contain">
             <div class="flex flex-row gap-2 mb-10">
                 <span class="bg-[#2563EB38] p-1 rounded-[4px]"><img src="/icons/level.png" alt="level" /></span>
                 <p class="text-[13px] font-medium">Total count</p>
             </div>
-            <p class="text-[20px] md:text-[24px] font-bold">50</p>
+            <p class="text-[20px] md:text-[24px] font-bold">{{ store.totalCount }}</p>
         </div>
      </div>
 
@@ -112,7 +142,7 @@ const prevPage = () => {
                 <p class="text-[#010101] font-bold text-[16px] mb-6">Logging history</p>
 
                 <span class="relative">
-                    <input type="search" placeholder="Search for entry name, amount.." class="w-full border border-[#EDEFF3] text-[#667D99] text-[12px] font-light rounded-[8px] px-[50px] py-2 focus:outline-none focus:ring-1 focus:ring-[#00065C] placeholder:text-[#11182740]">
+                    <input type="search" v-model="searchQuery" placeholder="Search for entry name, amount.." class="w-full border border-[#EDEFF3] text-[#667D99] text-[12px] font-light rounded-[8px] px-[50px] py-2 focus:outline-none focus:ring-1 focus:ring-[#00065C] placeholder:text-[#11182740]">
                     <span class="border-r h-5 absolute left-10 top-1"></span>
                     <span class="absolute left-3 top-1">
                         <Icon name="bi:search" />
@@ -137,7 +167,7 @@ const prevPage = () => {
                         :key="index"
                          @click="viewExpense(expense)" >
                          <!-- {{ expense.category.join(', ') }} -->
-                        <td class="text-[#2E2E2E] text-[13px] p-4">user</td>
+                        <td class="text-[#2E2E2E] text-[13px] p-4">{{ expense.category.join(', ') }}</td>
                         <td class="text-[#2E2E2E] text-[13px] p-4">{{ expense.description }}</td>
                         <td class="text-[#2E2E2E] text-[13px] p-4">{{ expense.amount }}</td>
                         <td class="text-[#2E2E2E] text-[13px] p-4">{{ expense.date }}</td>

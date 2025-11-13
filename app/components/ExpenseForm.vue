@@ -161,7 +161,7 @@ const handleSubmit = () => {
                 <div class="flex flex-col gap-3 p-3">
                     <div class="flex flex-col">
                         <label for="amount" class="text-[#111827] text-[10px] font-semibold uppercase">Amount</label>
-                        <input type="text" name="amount" id="amount" class="border border-[#EBEEF5] rounded-[8px] py-3 px-4 text-[12px]" placeholder="Input amount" v-model="store.form.amount">
+                        <input type="number" name="amount" id="amount" class="border border-[#EBEEF5] rounded-[8px] py-3 px-4 text-[12px]" placeholder="Input amount" v-model="store.form.amount">
                     </div>
 
                     <!-- <div class="flex flex-col">
