@@ -100,6 +100,52 @@ export const useExpenseFormStore = defineStore('expense-form', () => {
 
   const totalCount = computed(() => expenses.value.length)
 
+  // Group expenses by day
+const expensesByDay = computed(() => {
+  const groups: Record<string, { total: number; count: number }> = {}
+
+  expenses.value.forEach((exp) => {
+    const day = exp.date
+
+    if (!groups[day]) {
+      groups[day] = { total: 0, count: 0 }
+    }
+
+    groups[day].total += toNumber(exp.amount)
+    groups[day].count += 1
+  })
+
+  return groups
+})
+
+// Daily count array
+const dailyCount = computed(() =>
+  Object.entries(expensesByDay.value).map(([day, data]) => ({
+    day,
+    count: data.count
+  }))
+)
+
+// Daily total spent per day
+const dailySpend = computed(() =>
+  Object.entries(expensesByDay.value).map(([day, data]) => ({
+    day,
+    total: data.total
+  }))
+)
+
+// Average daily spend
+const averageDailySpend = computed(() => {
+  const totals = Object.values(expensesByDay.value).map((d) => d.total)
+  if (!totals.length) return 0
+  return totals.reduce((a, b) => a + b, 0) / totals.length
+})
+
+// Total spent overall
+const totalSpent = computed(() => {
+  return expenses.value.reduce((sum, e) => sum + toNumber(e.amount), 0)
+})
+
   return {
     expenses,
     budgetTarget,
@@ -110,7 +156,11 @@ export const useExpenseFormStore = defineStore('expense-form', () => {
     addExpense,
     resetForm,
     selectBudgetTarget,
-    isSelected
+    isSelected,
+    dailyCount,
+    dailySpend,
+    averageDailySpend,
+    totalSpent
   }
 }, {
      persist: process.client
