@@ -39,7 +39,8 @@ const filteredExpenses = computed(() => {
   return store.expenses.filter((e) => {
     return (
       e.description.toLowerCase().includes(q) ||
-      e.amount.toLowerCase().includes(q) ||
+        //   e.amount.toLowerCase().includes(q) ||
+        String(e.amount).includes(q) ||
       e.category.join(', ').toLowerCase().includes(q) ||
       e.paymentMethod.toLowerCase().includes(q) ||
       e.date.toLowerCase().includes(q)
