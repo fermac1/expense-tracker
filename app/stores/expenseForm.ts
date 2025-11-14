@@ -41,7 +41,7 @@ export const useExpenseFormStore = defineStore('expense-form', () => {
 
   // --- Actions ---
   const addExpense = () => {
-    if (!form.value.amount.trim()) {
+    if (!form.value.amount) {
       alert('Please enter an amount')
       return
     }
@@ -92,7 +92,19 @@ export const useExpenseFormStore = defineStore('expense-form', () => {
   const isSelected = (value: string) => budgetTarget.value.includes(value)
 
      // --- Computed Totals ---
-  const toNumber = (val: string) => parseFloat(val.replace(/[₦,]/g, '')) || 0
+  // const toNumber = (val: string) => parseFloat(val.replace(/[₦,]/g, '')) || 0
+  const toNumber = (val: any) => {
+  if (val === null || val === undefined) return 0;
+
+  // If already number
+  if (typeof val === 'number') return val;
+
+  // If not a string, convert it
+  const str = String(val);
+
+  return parseFloat(str.replace(/[₦,]/g, '')) || 0;
+};
+
 
   const totalExpenses = computed(() =>
     expenses.value.reduce((sum, e) => sum + toNumber(e.amount), 0)
