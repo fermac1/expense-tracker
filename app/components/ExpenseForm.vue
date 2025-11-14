@@ -249,8 +249,9 @@ const handleSubmit = () => {
                         <button class="border border-[#C7CDDB] rounded-full px-6 py-3 text-[#111827]">Go back</button>
                         <button class="rounded-full px-6 py-3"
                           :class="isFormComplete ? 'bg-[#13003D] text-white' : 'bg-[#C7CDDB] text-[#11182799]'"
-                            :disabled="!isFormComplete" type="submit">Save</button>
+                             type="submit">Save</button>
                     </div>
+                    <!-- :disabled="!isFormComplete" -->
                 </div>
                 
             </form>
