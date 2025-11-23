@@ -109,17 +109,32 @@ const prevPage = () => {
   if (currentPage.value > 1) currentPage.value--
 }
 
+// const formattedIncome = computed(() =>
+//   store.estimatedIncome.toLocaleString()
+// )
+// const formattedExpenses = computed(() =>
+//   store.totalExpenses.toLocaleString()
+// )
+
 const formattedIncome = computed(() =>
-  store.estimatedIncome.toLocaleString()
+  formatCurrency(store.estimatedIncome)
 )
+
 const formattedExpenses = computed(() =>
-  store.totalExpenses.toLocaleString()
+  formatCurrency(store.totalExpenses)
 )
 
 watch(searchQuery, () => {
   currentPage.value = 1
 })
 
+
+const formatCurrency = (num: number) =>
+  new Intl.NumberFormat('en-NG', {
+    style: 'currency',
+    currency: 'NGN',
+    minimumFractionDigits: 0
+  }).format(num)
 </script>
 
 <template>
@@ -146,14 +161,14 @@ watch(searchQuery, () => {
                 <span class="bg-[#ECC94B33] px-1 py-1 rounded-[4px]"><img src="/icons/wallet.png" alt="wallet" /></span>
                 <p class="text-[13px] font-medium">Estimated income</p>
             </div>
-            <p class="text-[20px] md:text-[24px] font-bold"><del>N</del>{{ formattedIncome }}</p>
+            <p class="text-[20px] md:text-[24px] font-bold">{{ formattedIncome }}</p>
         </div>
         <div class="bg-[#8B5CF612] rounded-[12px] px-4 py-6 text-[#1C005C]  bg-[url('/images/purple-bg-pattern.png')] bg-no-repeat bg-contain">
             <div class="flex flex-row gap-2 mb-10">
                 <span class="bg-[#8B5CF633] p-1 rounded-[4px]"><img src="/icons/coin.png" alt="coin" /></span>
                 <p class="text-[13px] font-medium">Total Expenses</p>
             </div>
-            <p class="text-[20px] md:text-[24px] font-bold"><del>N</del>{{ formattedExpenses }}</p>
+            <p class="text-[20px] md:text-[24px] font-bold">{{ formattedExpenses }}</p>
         </div>
         <div class="bg-[#F0F4FD] rounded-[12px] px-4 py-6 text-[#0D0D4F]  bg-[url('/images/blue-bg-pattern.png')] bg-no-repeat bg-contain">
             <div class="flex flex-row gap-2 mb-10">
@@ -199,7 +214,7 @@ watch(searchQuery, () => {
                          <!-- {{ expense.category.join(', ') }} -->
                         <td class="text-[#2E2E2E] text-[13px] p-4">{{ expense.category.join(', ') }}</td>
                         <td class="text-[#2E2E2E] text-[13px] p-4">{{ expense.description }}</td>
-                        <td class="text-[#2E2E2E] text-[13px] p-4">{{ expense.amount }}</td>
+                        <td class="text-[#2E2E2E] text-[13px] p-4">{{ formatCurrency(expense.amount) }}</td>
                         <td class="text-[#2E2E2E] text-[13px] p-4">{{ expense.date }}</td>
                         </tr>
                         <tr v-if="!store.expenses.length">

@@ -101,12 +101,20 @@ const selectMethod = (method: string) => {
 // )
 
 const isFormComplete = computed(() => {
+    const form = store.form
+
   return (
-    store.form.paymentMethod.length > 0 &&
-    store.form.amount.length > 0 &&
-      store.form.category.length > 0 &&
-      store.form.description.length > 0 
+    !!form.paymentMethod &&
+    !!form.amount &&
+    form.category.length > 0 &&
+    !!form.description
   )
+  // return (
+  //   store.form.paymentMethod.length > 0 &&
+  //   store.form.amount.length > 0 &&
+  //     store.form.category.length > 0 &&
+  //     store.form.description.length > 0 
+  // )
 })
 
 // Submit form'
@@ -183,7 +191,7 @@ const handleSubmit = () => {
                         @click="showDropdown = !showDropdown"
                         >
                         <span class="flex items-center gap-2">
-                            <Icon :name="paymentMethods.find(m => m.value === store.form.paymentMethod)?.icon || 'hugeicons:money-01'" class="w-4 h-4" />
+                            <Icon :name="paymentMethods.find(m => m.value === store.form.paymentMethod)?.icon || ''" class="w-4 h-4" />
                             {{ store.form.paymentMethod || 'Select method' }}
                         </span>
                         <Icon name="hugeicons:chevron-down" class="w-4 h-4" />
@@ -246,12 +254,12 @@ const handleSubmit = () => {
                     </div>
 
                     <div class="flex flex-row justify-end gap-4">
-                        <button class="border border-[#C7CDDB] rounded-full px-6 py-3 text-[#111827]">Go back</button>
+                        <button class="border border-[#C7CDDB] rounded-full px-6 py-3 text-[#111827]" disabled>Go back</button>
                         <button class="rounded-full px-6 py-3"
                           :class="isFormComplete ? 'bg-[#13003D] text-white' : 'bg-[#C7CDDB] text-[#11182799]'"
+                          :disabled="!isFormComplete"
                            type="submit">Save</button>
                     </div>
-                    <!-- :disabled="!isFormComplete" -->
                 </div>
                 
             </form>

@@ -4,7 +4,7 @@ import SecureLS from 'secure-ls'
 
 interface Expense {
   id: number
-  amount: string
+  amount: number
   paymentMethod: string
   description: string
   category: string[]
