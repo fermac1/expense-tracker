@@ -25,8 +25,10 @@ const store = useExpenseFormStore()
 const selectedExpense = ref<typeof store.expenses[0] | null>(null)
 
 // Pagination setup
+// const currentPage = ref(1)
+// const perPage = 5
 const currentPage = ref(1)
-const perPage = 5
+const perPage = ref(10)
 
 // Search query
 const searchQuery = ref('')
@@ -50,9 +52,36 @@ const filteredExpenses = computed(() => {
 
 // Compute total pages
 const totalPages = computed(() => {
-  return Math.ceil(filteredExpenses.value.length / perPage)
+  return Math.ceil(filteredExpenses.value.length / perPage.value)
 })
 
+const visiblePages = computed(() => {
+const pages: (number | string)[] = []
+
+
+if (totalPages.value <= 6) {
+for (let i = 1; i <= totalPages.value; i++) pages.push(i)
+} else {
+pages.push(1)
+if (currentPage.value > 3) pages.push('...')
+
+
+for (
+let i = Math.max(2, currentPage.value - 1);
+i <= Math.min(totalPages.value - 1, currentPage.value + 1);
+i++
+) {
+pages.push(i)
+}
+
+
+if (currentPage.value < totalPages.value - 2) pages.push('...')
+pages.push(totalPages.value)
+}
+
+
+return pages
+})
 // Paginated list
 const paginatedExpenses = computed(() => {
   // Sort by date (most recent first)
@@ -61,8 +90,8 @@ const paginatedExpenses = computed(() => {
 })
 
   // Slice for pagination
-  const start = (currentPage.value - 1) * perPage
-  return sorted.slice(start, start + perPage)
+  const start = (currentPage.value - 1) * perPage.value
+  return sorted.slice(start, start + perPage.value)
 })
 
 // Select an expense to view details
@@ -181,7 +210,63 @@ watch(searchQuery, () => {
                     
                 </table>  
                 <!-- Pagination controls -->
-                <div
+               <div v-if="totalPages > 1" class="flex items-center justify-between mt-6 px-2 mb-6">
+
+                    <!-- Items per page -->
+                    <div class="flex items-center gap-2">
+                    <div class="relative">
+                    <select
+                    v-model="perPage"
+                    class="appearance-none border border-gray-200 rounded-lg px-3 py-2 pr-8 text-[12px] focus:outline-none cursor-pointer"
+                    >
+                    <option :value="5">5</option>
+                    <option :value="10">10</option>
+                    <option :value="20">20</option>
+                    </select>
+                    <span class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer">
+                        <Icon name="iconamoon:arrow-down-2-thin" />
+                    </span>
+                    </div>
+                    <span class="text-[12px] text-[#010101] font-medium">items per page</span>
+                    </div>
+                    <!-- Pagination numbers -->
+                    <div class="flex items-center gap-2">
+                        <button
+                        v-for="page in visiblePages"
+                        :key="page"
+                        @click="typeof page === 'number' && (currentPage = page)"
+                        :class="[
+                        'w-7 h-7 flex items-center justify-center rounded-[6px] text-sm font-medium',
+                        currentPage === page
+                        ? 'bg-[#13003D] text-white border-[#C3ACF6]'
+                        : 'text-gray-700'
+                        ]"
+                        >
+                        {{ page === '...' ? '...' : page }}
+                        </button>
+                    </div>
+
+
+                    <!-- Arrows -->
+                    <div class="flex items-center gap-2">
+                        <button
+                        @click="prevPage"
+                        :disabled="currentPage === 1"
+                        class="w-9 h-9 flex items-center justify-center rounded-lg border text-gray-500 disabled:opacity-40 cursor-pointer"
+                        >
+                        <Icon name="iconamoon:arrow-left-2-thin" />
+                        </button>
+                        <button
+                        @click="nextPage"
+                        :disabled="currentPage === totalPages"
+                        class="w-9 h-9 flex items-center justify-center rounded-lg border text-gray-500 disabled:opacity-40 cursor-pointer"
+                        >
+                        <Icon name="iconamoon:arrow-right-2-thin" />
+                        </button>
+                    </div>
+                </div>
+
+                <!-- <div
                     v-if="totalPages > 1"
                     class="flex justify-center items-center gap-4 mt-4 text-sm"
                 >
@@ -202,7 +287,7 @@ watch(searchQuery, () => {
                     >
                     Next
                     </button>
-                </div>
+                </div>-->
             </div>
       </div>
 
