@@ -1,75 +1,49 @@
-# Nuxt Minimal Starter
+# Expense Tracker 💸
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+A simple, web-based expense tracker to help you log and monitor your spending.  
+Built with modern web technologies and designed to help you stay on top of your finances.
 
-## Setup
+---
 
-Make sure to install dependencies:
+## 🌟 Features
 
+- Add, edit and delete expenses (amount, date, description).  
+- View a history of all expenses.  
+- Show total spending summaries.  
+- Responsive UI — works on both desktop and mobile devices.  
+- Local storage for persistence.  
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend:** Nuxt 
+- **Language:** TypeScript    
+- **Styling:** Tailwind CSS
+
+---
+
+## 📦 Getting Started / Installation
+
+1. Clone the repository:  
 ```bash
-# npm
-npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
+   git clone https://github.com/fermac1/expense-tracker.git
+```
+2. Change into the project directory:
+```bash
+    cd expense-tracker
+```
+3. Install dependencies:
+```bash
+    pnpm install 
+```
+4. Run the development server:
+ ```bash
+    pnpm run dev 
 ```
 
-## Development Server
 
-Start the development server on `http://localhost:3000`:
+## 🚀 Usage
 
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+- Use the UI to add a new expense by entering amount, date, and description.
+- View the list of all expenses and check totals.
